@@ -16,6 +16,7 @@ void SelectionSort(int array[], size_t size);
 
 
 int main() {
+    int pos = INT32_MAX;
 	const size_t ELEMENTS = 7;
 	const size_t TESTS = 3;
 	int data[][ELEMENTS] = {
@@ -84,15 +85,68 @@ int main() {
 	return 0;
 }
 
-unsigned long long int Fibonacci(unsigned int n){
-	return 0;
+unsigned long long int Fibonacci(unsigned int n)
+{
+	if (n == 0)
+        return 0;
+    else if (n == 1)
+        return 1;
+    else
+        return Fibonacci(n - 1) + Fibonacci(n - 2);
 }
-void PrintReverseString(const string& str, ostream& output){
+void PrintReverseString(const string& str, ostream& output)
+{
+    if (str.length() == 0)
+        output << str;
+
+    else if (str.length() == 1)
+        output << str;
+
+    else
+    {
+        string retVal = str;
+        output << retVal[str.length()-1];
+        retVal.resize(retVal.length() -1);
+
+        PrintReverseString(retVal, output);
+    }
 }
 // You may change the parameters of these functions
-size_t MinimumPosition(const int array[], size_t size){
-	return 0;
-}
-void SelectionSort(int array[], size_t size){
+size_t MinimumPosition(const int array[], size_t size)
+{
 
+    if(size <= 1)
+    {
+        return 0;
+    }
+
+    int smallest = MinimumPosition(array + 1, size - 1) + 1;
+
+    if(array[0] < array[smallest])
+    {
+        return 0;
+    }
+    else
+    {
+        return smallest;
+    }
+}
+void SelectionSort(int array[], size_t size)
+{
+    int maxIndex = 0, temp, index;
+    for(index = maxIndex; index < size; index++)
+    {
+        if(array[index] > array[maxIndex])
+        {
+            maxIndex = index;
+        }
+    }
+    temp = array[size-1];
+    array[size-1] = array[maxIndex];
+    array[maxIndex] = temp;
+
+    if(size > 1)
+    {
+        SelectionSort(array, --size);
+    }
 }
